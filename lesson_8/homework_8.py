@@ -59,13 +59,13 @@ def sub_numbers(number, sub_result):
 
 def make_operation(operation, *numbers):
     operation_dict = {
-        '+': {'func': sum_numbers, 'result': 0},
-        '-': {'func': sub_numbers, 'result': numbers[0]},
-        '*': {'func': mult_numbers, 'result': 1}
+        '+': sum_numbers,
+        '-': sub_numbers,
+        '*': mult_numbers
     }
-    result = operation_dict[operation]['result']
-    for number in numbers:
-        result = operation_dict[operation]['func'](number, result)
+    result = numbers[0]
+    for number in numbers[1:]:
+        result = operation_dict[operation](number, result)
     print(result)
 
 
