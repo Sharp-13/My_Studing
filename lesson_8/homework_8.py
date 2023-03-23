@@ -46,11 +46,22 @@ def sum_numbers(number, sum_result):
      sum_result = sum_result + number
      return sum_result
 
+
+def mult_numbers(number, mult_result):
+    mult_result = mult_result * number
+    return mult_result
+
+
+def sub_numbers(number, sub_result):
+    sub_result = sub_result - number
+    return sub_result
+
+
 def make_operation(operation, *numbers):
     operation_dict = {
-        '+': {'func': sum_numbers, 'result': 0}
-        # '-': lambda number, sub_result = 0: sub_result - number,
-        # '*': lambda number, mult_result = 1: mult_result * number
+        '+': {'func': sum_numbers, 'result': 0},
+        '-': {'func': sub_numbers, 'result': numbers[0]},
+        '*': {'func': mult_numbers, 'result': 1}
     }
     result = operation_dict[operation]['result']
     for number in numbers:
@@ -58,4 +69,6 @@ def make_operation(operation, *numbers):
     print(result)
 
 
-make_operation('+', 7, 7, 2)
+make_operation('+', 2, 5, 18, 5)
+make_operation('-', 25, 5, 10)
+make_operation('*', 7, 8, 2)
