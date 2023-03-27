@@ -5,7 +5,10 @@
 #  Make a directory with 2 modules; make a function in one of them;
 #  then import this function in the other module and use that in your script of choice.
 
+from task_1 import is_password_valid
 
+password = input('Please, write a password: ')
+is_password_valid(password)
 
 # Task 2
 #
@@ -19,15 +22,30 @@ import sys
 
 print(sys.path)
 
+unsorted_list = [(2, 3), (6, 3, 4), (1, 9,3,7), (2, 5)]
+
+def sort_list(unsorted_list):
+    sorted_list = sort_last(unsorted_list)
+    print(sorted_list)
+
+
+try:
+    from list1 import sort_last
+    sort_list(unsorted_list)
+except ModuleNotFoundError:
+    print('Не вдалося знайти потрібний модуль')
+
+
 sys.path.append('C:\\google-python-exercises\\basic\\solution')
 
 print(sys.path)
 
-from list1 import sort_last
+try:
+    from list1 import sort_last
+    sort_list(unsorted_list)
+except ModuleNotFoundError:
+    print('Не вдалося знайти потрібний модуль')
 
-unsorted_list = [(2, 3), (6, 3, 4), (1, 9,3,7), (2, 5)]
-sorted_list = sort_last(unsorted_list)
-print(sorted_list)
 
 # Task 3
 #
@@ -57,3 +75,4 @@ print(sorted_list)
 # Try running your module on itself: e.g., test("mymod.py"). Note that the test opens the file twice;
 # if you’re feeling ambitious, you may be able to improve this by passing an open file object
 # into the two count functions (hint: file.seek(0) is a file rewind).
+
