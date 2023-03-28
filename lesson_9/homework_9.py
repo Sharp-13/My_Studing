@@ -76,3 +76,10 @@ except ModuleNotFoundError:
 # if you’re feeling ambitious, you may be able to improve this by passing an open file object
 # into the two count functions (hint: file.seek(0) is a file rewind).
 
+from mymod import count_lines
+from mymod import count_chars
+from mymod import test
+
+print(count_lines('task_1.py'))
+print(count_chars('task_1.py'))
+print(test('mymod.py'))
