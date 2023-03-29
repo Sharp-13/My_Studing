@@ -76,10 +76,30 @@ except ModuleNotFoundError:
 # if you’re feeling ambitious, you may be able to improve this by passing an open file object
 # into the two count functions (hint: file.seek(0) is a file rewind).
 
+# import mymod
+
 from mymod import count_lines
 from mymod import count_chars
 from mymod import test
 
-print(count_lines('task_1.py'))
-print(count_chars('task_1.py'))
-print(test('mymod.py'))
+invite_text = '''Hello! 
+Please, write the name of the file (with path) you'd like to read: 
+'''
+
+file_name = input(invite_text)
+
+select_operation_text = '''Please, select operation:
+1. Count the number of lines in file
+2. Count the number of characters in file
+3. Count both number of lines and characters in file:
+'''
+
+selected_operation = input(select_operation_text)
+
+operation_dict = {
+    '1': count_lines,
+    '2': count_chars,
+    '3': test
+}
+
+print(operation_dict[selected_operation](file_name))

@@ -17,4 +17,7 @@ def test(name):
     return line_count, char_count
 
 
+# print('Modul is imported successfully')
 
+if __name__ == '__main__':
+    pass
