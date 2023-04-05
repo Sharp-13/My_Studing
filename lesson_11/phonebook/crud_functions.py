@@ -1,13 +1,13 @@
 import json
 
-def create_number():
+def create_number(phone_number):
 
-    phone_number = number_entry()
+    # phone_number = number_entry()
 
     with open('phonebook.json', 'r') as phonebook_file:
         phonebook_container = json.load(phonebook_file)
 
-    if find_by_number(phonebook_container, phone_number):
+    if is_number_in_phonebook(phonebook_container, phone_number):
         print('Такий номер вже є у базі')
         return
     else:
@@ -18,19 +18,37 @@ def create_number():
     print('Запис додано успішно!')
 
 
-def find_number():
-    phone_number = number_entry()
+def search_number(phone_number):
+    # # phone_number = number_entry()
+    # with open('phonebook.json', 'r') as phonebook_file:
+    #     phonebook_container = json.load(phonebook_file)
+    # COICE_SEARCH_METHOD = '''Будь ласка, виберіть метод пошуку:
+    # 1. Пошук за номером телефону
+    # 2. Пошук за іменем
+    # 3. Пошук за прізвищем
+    # 4. Пошук за повним іменем
+    # 5. Пошук по місту/країні
+    # ------------------------
+    # 0. Повернутись до головного меню
+    # '''
+    # search_method = input(COICE_SEARCH_METHOD)
+    # search_method_dict = {
+    #     '1': find_by_number,
+    #     '2': find_by_name,
+    #     '3': find_by_surname,
+    #     '4': find_by_fullname,
+    #     '5': find_by_city_state
+    # }
+    pass
+
+
+
+def update_number(phone_number):
+    # phone_number = number_entry()
     with open('phonebook.json', 'r') as phonebook_file:
         phonebook_container = json.load(phonebook_file)
 
-
-
-def update_number():
-    phone_number = number_entry()
-    with open('phonebook.json', 'r') as phonebook_file:
-        phonebook_container = json.load(phonebook_file)
-
-    if not find_by_number(phonebook_container, phone_number):
+    if not is_number_in_phonebook(phonebook_container, phone_number):
         print('Такого номеру немає у базі')
         return
     else:
@@ -40,16 +58,29 @@ def update_number():
     2. Last name
     3. City
     4. State
+    -------------
+    0. Повернутись до головного меню
     '''
-    selected_field = input(CHOICE_FIELD_TEXT)
-    choice_field_dict = {
-        '1': 'First name',
-        '2': 'Last name',
-        '3': 'City',
-        '4': 'State'
-    }
-    current_number_data[choice_field_dict[selected_field]] = field_validator(choice_field_dict[selected_field])
-    phonebook_container[phone_number] = current_number_data
+    while True:
+        selected_field = input(CHOICE_FIELD_TEXT)
+        choice_field_dict = {
+            '1': 'First name',
+            '2': 'Last name',
+            '3': 'City',
+            '4': 'State'
+        }
+        if int(selected_field) in range(1, 5):
+            current_number_data[choice_field_dict[selected_field]] = field_validator(choice_field_dict[selected_field])
+            phonebook_container[phone_number] = current_number_data
+            another_change = input('Бажаєте внести зміни в інше поле?(y/n): ')
+            if another_change == 'y':
+                continue
+            elif another_change == 'n':
+                break
+        elif selected_field == '0':
+            return
+        else:
+            print('Невірно вибране поле.')
 
     with open('phonebook.json', 'w') as phonebook_file:
         json.dump(phonebook_container, phonebook_file)
@@ -57,12 +88,12 @@ def update_number():
     print("Дані оновлено успішно!")
 
 
-def delete_number():
-    phone_number = number_entry()
+def delete_number(phone_number):
+    # phone_number = number_entry()
     with open('phonebook.json', 'r') as phonebook_file:
         phonebook_container = json.load(phonebook_file)
 
-    if not find_by_number(phonebook_container, phone_number):
+    if not is_number_in_phonebook(phonebook_container, phone_number):
         print('Такого номеру немає у базі')
         return
     else:
@@ -74,7 +105,7 @@ def delete_number():
     print("Номер видалено успішно!")
 
 
-def find_by_number(phone_number_dict, phone_number):
+def is_number_in_phonebook(phone_number_dict, phone_number):
     number_list = [number for number in phone_number_dict]
     if phone_number in number_list:
         return True

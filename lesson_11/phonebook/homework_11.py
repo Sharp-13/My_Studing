@@ -36,7 +36,7 @@ print(GREATING_TEXT)
 
 operation_dict = {
     '1': create_number,
-    '2': find_number,
+    '2': search_number,
     '3': update_number,
     '4': delete_number
 }
@@ -44,7 +44,8 @@ operation_dict = {
 while True:
     selected_operation = input(CHOICE_OPERATION_TEXT)
     if int(selected_operation) in range(1, 5):
-        operation_dict[selected_operation]()
+        phone_number = number_entry()
+        operation_dict[selected_operation](phone_number)
     elif int(selected_operation) == 0:
         break
     else:
