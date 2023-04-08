@@ -1,8 +1,8 @@
 import json
 
-def create_number(phone_number):
+def create_number():
 
-    # phone_number = number_entry()
+    phone_number = number_entry()
 
     with open('phonebook.json', 'r') as phonebook_file:
         phonebook_container = json.load(phonebook_file)
@@ -18,33 +18,40 @@ def create_number(phone_number):
     print('Запис додано успішно!')
 
 
-def search_number(phone_number):
-    # # phone_number = number_entry()
-    # with open('phonebook.json', 'r') as phonebook_file:
-    #     phonebook_container = json.load(phonebook_file)
-    # COICE_SEARCH_METHOD = '''Будь ласка, виберіть метод пошуку:
-    # 1. Пошук за номером телефону
-    # 2. Пошук за іменем
-    # 3. Пошук за прізвищем
-    # 4. Пошук за повним іменем
-    # 5. Пошук по місту/країні
-    # ------------------------
-    # 0. Повернутись до головного меню
-    # '''
-    # search_method = input(COICE_SEARCH_METHOD)
-    # search_method_dict = {
-    #     '1': find_by_number,
-    #     '2': find_by_name,
-    #     '3': find_by_surname,
-    #     '4': find_by_fullname,
-    #     '5': find_by_city_state
-    # }
-    pass
+def search_number():
+    with open('phonebook.json', 'r') as phonebook_file:
+        phonebook_container = json.load(phonebook_file)
+
+    COICE_SEARCH_METHOD = '''Будь ласка, виберіть метод пошуку:
+    1. Пошук за номером телефону
+    2. Пошук за іменем
+    3. Пошук за прізвищем
+    4. Пошук за повним іменем
+    5. Пошук по місту/країні
+    ------------------------
+    0. Повернутись до головного меню
+    '''
+    search_method = input(COICE_SEARCH_METHOD)
+    search_method_dict = {
+        '1': find_by_number,
+        '2': find_by_name,
+        '3': find_by_surname,
+        '4': find_by_fullname,
+        '5': find_by_city_state
+    }
+
+    if int(search_method) in range(1, 6):
+        search_result = search_method_dict[search_method](phonebook_container)
+        print(search_result)
+    elif search_method == '0':
+        return
+    else:
+        print('Такого методу не існує')
 
 
 
-def update_number(phone_number):
-    # phone_number = number_entry()
+def update_number():
+    phone_number = number_entry()
     with open('phonebook.json', 'r') as phonebook_file:
         phonebook_container = json.load(phonebook_file)
 
@@ -88,8 +95,8 @@ def update_number(phone_number):
     print("Дані оновлено успішно!")
 
 
-def delete_number(phone_number):
-    # phone_number = number_entry()
+def delete_number():
+    phone_number = number_entry()
     with open('phonebook.json', 'r') as phonebook_file:
         phonebook_container = json.load(phonebook_file)
 
@@ -97,7 +104,7 @@ def delete_number(phone_number):
         print('Такого номеру немає у базі')
         return
     else:
-        current_number_data = phonebook_container.pop(phone_number)
+        phonebook_container.pop(phone_number)
 
     with open('phonebook.json', 'w') as phonebook_file:
         json.dump(phonebook_container, phonebook_file)
@@ -141,3 +148,29 @@ def field_validator(field):
         if not is_field_valid:
             print("Це поле не є валідним!")
     return field_value
+
+
+def find_by_number(container):
+    phone_number = number_entry()
+    for key, value in container.items():
+        if key == phone_number:
+            phone_number_string = f'За номером телефону {key} знайдено наступний запис\n {value}'
+            return phone_number_string
+    else:
+        return 'Такого номеру немає у базі'
+
+
+def find_by_name():
+    pass
+
+
+def find_by_surname():
+    pass
+
+
+def find_by_fullname():
+    pass
+
+
+def find_by_city_state():
+    pass

@@ -44,8 +44,7 @@ operation_dict = {
 while True:
     selected_operation = input(CHOICE_OPERATION_TEXT)
     if int(selected_operation) in range(1, 5):
-        phone_number = number_entry()
-        operation_dict[selected_operation](phone_number)
+        operation_dict[selected_operation]()
     elif int(selected_operation) == 0:
         break
     else:
