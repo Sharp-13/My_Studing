@@ -41,8 +41,7 @@ def search_number():
     }
 
     if int(search_method) in range(1, 6):
-        search_result = search_method_dict[search_method](phonebook_container)
-        print(search_result)
+        search_method_dict[search_method](phonebook_container)
     elif search_method == '0':
         return
     else:
@@ -61,23 +60,23 @@ def update_number():
     else:
         current_number_data = phonebook_container.pop(phone_number)
     CHOICE_FIELD_TEXT = '''Будь ласка, вкажіть поле, в яке Ви хотіли б внести зміни:
-    1. First name
-    2. Last name
-    3. City
-    4. State
+    1. Ім'я
+    2. Прізвище
+    3. Місто
+    4. Країна
     -------------
     0. Повернутись до головного меню
     '''
     while True:
         selected_field = input(CHOICE_FIELD_TEXT)
         choice_field_dict = {
-            '1': 'First name',
-            '2': 'Last name',
-            '3': 'City',
-            '4': 'State'
+            '1': ("Ім'я", "first name"),
+            '2': ("Прізвище", "last name"),
+            '3': ("Місто", "city"),
+            '4': ("Країна", "state")
         }
         if int(selected_field) in range(1, 5):
-            current_number_data[choice_field_dict[selected_field]] = field_validator(choice_field_dict[selected_field])
+            current_number_data[choice_field_dict[selected_field][1]] = field_validator(choice_field_dict[selected_field][0])
             phonebook_container[phone_number] = current_number_data
             another_change = input('Бажаєте внести зміни в інше поле?(y/n): ')
             if another_change == 'y':
@@ -121,11 +120,11 @@ def is_number_in_phonebook(phone_number_dict, phone_number):
 
 
 def add_number_data():
-    data_name_list = ["First name", "Last name", "City", "State"]
+    data_name_list = [("Ім'я", "first name"), ("Прізвище", "last name"), ("Місто", "city"), ("Країна", "state")]
     data_final_dict = dict()
     for field in data_name_list:
-        field_value = field_validator(field)
-        data_final_dict[field] = field_value
+        field_value = field_validator(field[0])
+        data_final_dict[field[1]] = field_value
     return data_final_dict
 
 
@@ -146,7 +145,7 @@ def field_validator(field):
         field_value = input(f"Введіть значення для поля {field}: ")
         is_field_valid = field_value.replace(" ", "").replace("-", "").replace(".", "").isalpha()
         if not is_field_valid:
-            print("Це поле не є валідним!")
+            print("Це значення не є валідним!")
     return field_value
 
 
@@ -155,22 +154,56 @@ def find_by_number(container):
     for key, value in container.items():
         if key == phone_number:
             phone_number_string = f'За номером телефону {key} знайдено наступний запис\n {value}'
-            return phone_number_string
+            print(phone_number_string)
+            return
     else:
-        return 'Такого номеру немає у базі'
+        print('Такого номеру немає у базі')
 
 
-def find_by_name():
-    pass
+def find_by_name(container):
+    name = field_validator("Ім'я")
+    result_dict = dict()
+    for key, value in container.items():
+        if value['first name'] == name:
+            result_dict[key] = value
+    if not result_dict:
+        print("Записів з таким ім'ям немає у базі")
+    else:
+        print(f"За ім'ям {name} знайдено наступні записи:\n{result_dict}")
 
 
-def find_by_surname():
-    pass
+def find_by_surname(container):
+    surname = field_validator('Прізвище')
+    result_dict = dict()
+    for key, value in container.items():
+        if value['last name'] == surname:
+            result_dict[key] = value
+    if not result_dict:
+        print("Записів з таким ім'ям немає у базі")
+    else:
+        print(f"За прізвищем {surname} знайдено наступні записи:\n{result_dict}")
 
 
-def find_by_fullname():
-    pass
+def find_by_fullname(container):
+    name = field_validator("Ім'я")
+    surname = field_validator('Прізвище')
+    fullname = name + ' ' + surname
+    result_dict = dict()
+    for key, value in container.items():
+        if (value['first name'] == name and value['last name'] == surname):
+            result_dict[key] = value
+    if not result_dict:
+        print("Записів з таким ім'ям немає у базі")
+    else:
+        print(f"За ім'ям {fullname} знайдено наступні записи: \n{result_dict}")
 
 
-def find_by_city_state():
-    pass
+def find_by_city_state(container):
+    city_state = field_validator('Місто або Країна')
+    result_dict = dict()
+    for key, value in container.items():
+        if (value['city'] == city_state or value['state'] == city_state):
+            result_dict[key] = value
+    else:
+        print("Записів з таким ім'ям немає у базі")
+    print(f"У результаті пошуку за значенням {city_state} знайдено наступні записи: \n{result_dict}")
