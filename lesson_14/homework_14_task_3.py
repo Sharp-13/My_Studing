@@ -22,14 +22,14 @@ def arg_rules(type_: type, max_length: int, contains: list):
                 if item not in some_string:
                     is_contains_in_string = False
                     break
-            if len(some_string) > max_length:
-                print('argument is longer then max_lenght')
+            if is_contains_in_string == False:
+                print("argument doesn't contain mandatory symbols")
                 return False
             elif type(some_string) != str:
                 print('argument is not string')
                 return False
-            elif is_contains_in_string == False:
-                print("argument doesn't contain mandatory symbols")
+            elif len(some_string) > max_length:
+                print('argument is longer then max_lenght')
                 return False
             else:
                 return func(some_string)

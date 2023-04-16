@@ -4,29 +4,21 @@
 #
 
 from functools import wraps
-
+from typing import Callable
 def stop_words(words: list):
-    def decor(func):
+    def decor(func: Callable):
         @wraps(func)
-        def wrap(some_string: str):
-            func_string = func(some_string)
-            list_of_words = func_string.split()
+        def wrap(*args, **kwargs):
+            result_string = func(*args, **kwargs)
             for word in words:
-                i = 0
-                while i < len(list_of_words):
-                    if list_of_words[i] == word:
-                        list_of_words[i] = "*"
-                    i += 1
-            result_string = ' '.join(list_of_words)
-            return(result_string)
+                result_string = result_string.replace(word, "*")
+            return result_string
         return wrap
     return decor
 
-
-
 @stop_words(['pepsi', 'BMW'])
-def create_slogan(name: str) -> str:
-    return f"{name} drinks pepsi in his brand new BMW"
+def create_slogan(name = "Steve"):
+    return f"{name} drinks pepsi in his brand new BMW!"
 
-# print(create_slogan('Serhii'))
-assert create_slogan("Steve") == "Steve drinks * in his brand new *"
+print(create_slogan('Serhii'))
+assert create_slogan("Steve") == "Steve drinks * in his brand new *!"
