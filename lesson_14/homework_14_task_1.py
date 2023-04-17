@@ -24,6 +24,7 @@ def logger(func):
     return wrap
 
 
+
 @logger
 def add(x, y):
     return x + y

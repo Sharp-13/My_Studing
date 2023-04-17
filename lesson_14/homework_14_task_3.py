@@ -44,3 +44,4 @@ def create_slogan(name: str) -> str:
 
 assert create_slogan('johndoe0@gmail') is False
 assert create_slogan('S@SH05') == 'S@SH05 drinks pepsi in his brand new BMW!'
+
