@@ -12,3 +12,4 @@ def external_func(some_var: int):
 result = external_func(4)
 print(result(3))
 print(external_func(2)(8))
+

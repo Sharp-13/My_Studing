@@ -12,3 +12,4 @@ def some_func():
 
 result = var_counter(some_func)
 print(result)
+

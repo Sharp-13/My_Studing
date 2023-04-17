@@ -24,3 +24,4 @@ def remove_negatives(nums):
 
 assert choose_func(nums1, square_nums, remove_negatives) == [1, 4, 9, 16, 25]
 assert choose_func(nums2, square_nums, remove_negatives) == [1, 3, 5]
+
