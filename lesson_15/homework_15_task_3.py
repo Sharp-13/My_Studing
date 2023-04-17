@@ -61,37 +61,55 @@ class TVController:
         global current_chan
         return self.chan[current_chan - 1]
 
-    # def is_exist(self, chan_name = None, chan_num = None):
-    #     if (chan_name in self.chan) or (chan_num > 0 and chan_num <= len(self.chan)):
-    #         return 'Yes'
-    #     else:
-    #         return "No"
+    def is_exist(self, chan_name_num):
+        is_name_exist = isinstance(chan_name_num, str) and chan_name_num in self.chan
+        is_num_exist = isinstance(chan_name_num, int) and chan_name_num > 0 and chan_name_num <= len(self.chan)
+        if is_name_exist or is_num_exist:
+            return 'Yes'
+        else:
+            return "No"
 
 
 
 
 controller = TVController(CHANNELS)
 
-if controller.first_channel() == "BBC":
+if controller.first_channel() == "Discovery":
     print('Ok')
+else:
+    print('Mistake')
 
 if controller.last_channel() == "TV1000":
     print('Ok')
+else:
+    print('Mistake')
 
 if controller.turn_channel(1) == "BBC":
     print('Ok')
+else:
+    print('Mistake')
 
 if controller.next_channel() == "Discovery":
     print('Ok')
+else:
+    print('Mistake')
 
 if controller.previous_channel() == "BBC":
     print('Ok')
+else:
+    print('Mistake')
 
 if controller.current_channel() == "BBC":
     print('Ok')
+else:
+    print('Mistake')
 
-# if controller.is_exist(4) == "No":
-#     print('Ok')
-#
-# if controller.is_exist("BBC") == "Yes":
-#     print('Ok')
+if controller.is_exist(4) == "No":
+    print('Ok')
+else:
+    print('Mistake')
+
+if controller.is_exist("CNN") == "Yes":
+    print('Ok')
+else:
+    print('Mistake')
