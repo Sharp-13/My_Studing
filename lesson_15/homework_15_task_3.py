@@ -22,44 +22,39 @@
 CHANNELS = ["BBC", "Discovery", "TV1000"]
 
 class TVController:
-    current_chan = 1
+
     def __init__(self, chan):
         self.chan = chan
+        self.current_chan = 1
 
     def first_channel(self):
-        global current_chan
-        current_chan = 1
+        self.current_chan = 1
         return self.chan[0]
 
     def last_channel(self):
-        global current_chan
-        current_chan = len(self.chan)
-        return self.chan[current_chan-1]
+        self.current_chan = len(self.chan)
+        return self.chan[self.current_chan-1]
 
     def turn_channel(self, chan_num):
-        global current_chan
-        current_chan = chan_num
+        self.current_chan = chan_num
         return self.chan[chan_num-1]
 
     def next_channel(self):
-        global current_chan
-        if current_chan < len(self.chan)-1:
-            current_chan = current_chan + 1
+        if self.current_chan < len(self.chan)-1:
+            self.current_chan = self.current_chan + 1
         else:
-            current_chan = 1
-        return self.chan[current_chan-1]
+            self.current_chan = 1
+        return self.chan[self.current_chan-1]
 
     def previous_channel(self):
-        global current_chan
-        if current_chan == 1:
-            current_chan = len(self.chan)
+        if self.current_chan == 1:
+            self.current_chan = len(self.chan)
         else:
-            current_chan = current_chan - 1
-        return self.chan[current_chan - 1]
+            self.current_chan = self.current_chan - 1
+        return self.chan[self.current_chan - 1]
 
     def current_channel(self):
-        global current_chan
-        return self.chan[current_chan - 1]
+        return self.chan[self.current_chan - 1]
 
     def is_exist(self, chan_name_num):
         is_name_exist = isinstance(chan_name_num, str) and chan_name_num in self.chan
