@@ -40,6 +40,42 @@ class Fraction:
         result_denom = div_denominator / evklid(div_numerator, div_denominator)
         return Fraction(int(result_num), int(result_denom))
 
+    def __lt__(self, other):
+        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
+        result = self.numerator * (common_denominator / self.denominator) < \
+                 other.numerator * (common_denominator / other.denominator)
+        return result
+
+    def __le__(self, other):
+        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
+        result = self.numerator * (common_denominator / self.denominator) <= \
+                 other.numerator * (common_denominator / other.denominator)
+        return result
+
+    def __gt__(self, other):
+        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
+        result = self.numerator * (common_denominator / self.denominator) > \
+                 other.numerator * (common_denominator / other.denominator)
+        return result
+
+    def __ge__(self, other):
+        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
+        result = self.numerator * (common_denominator / self.denominator) >= \
+                 other.numerator * (common_denominator / other.denominator)
+        return result
+
+    def __eq__(self, other):
+        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
+        result = self.numerator * (common_denominator / self.denominator) == \
+                 other.numerator * (common_denominator / other.denominator)
+        return result
+
+    def __ne__(self, other):
+        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
+        result = self.numerator * (common_denominator / self.denominator) != \
+                 other.numerator * (common_denominator / other.denominator)
+        return result
+
 
 def evklid(a, b):
     while a != 0 and b != 0:
@@ -51,10 +87,13 @@ def evklid(a, b):
 
 
 if __name__ == "__main__":
-    x = Fraction(2, 3)
+    x = Fraction(1, 2)
     y = Fraction(1, 4)
     print(x+y)
     print(x-y)
     print(x*y)
     print(x/y)
-    # assert (x + y) == Fraction(3, 4)
+    print(x<y)
+    print(x>y)
+    print(x==y)
+    assert (x + y) == Fraction(3, 4)

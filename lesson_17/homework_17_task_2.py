@@ -17,11 +17,17 @@
 # Also, the book class should have a class variable which holds the amount of all existing books
 #
 
+from dataclasses import dataclass
 import books_modul
 import authors
 
+@dataclass
 class Library:
-    pass
+
+    name: str
+    books: list[books_modul.Book]
+    authors: list[authors.Author]
+
 
 # class Book:
 #
@@ -42,13 +48,13 @@ class Library:
 #         self.name = name
 #         self.country = country
 #         self.birthday = birthday
-#         books_list = list()
-#         for book in books:
-#             if isinstance(book, Book):
-#                 books_list.append(book)
-#             else:
-#                 raise ValueError('Not valid bookname')
-#         self.books = books_list
+#         # books_list = list()
+#         # for book in books:
+#         #     if isinstance(book, Book):
+#         #         books_list.append(book)
+#         #     else:
+#         #         raise ValueError('Not valid bookname')
+#         self.books = books
 #
 #     def __repr__(self):
 #         return f"{self.name} (birthday: {self.birthday}, country: {self.country}, books: {self.books}"
