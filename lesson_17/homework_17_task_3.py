@@ -15,18 +15,24 @@ class Fraction:
         return f'Fraction({self.numerator}, {self.denominator})'
 
     def __add__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result_num = (self.numerator * (common_denominator / self.denominator)) + \
                      (other.numerator * (common_denominator / other.denominator))
         return Fraction(int(result_num), int(common_denominator))
 
     def __sub__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result_num = (self.numerator * (common_denominator / self.denominator)) - \
                      (other.numerator * (common_denominator / other.denominator))
         return Fraction(int(result_num), int(common_denominator))
 
     def __mul__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         mul_numerator = self.numerator * other.numerator
         mul_denominator = self.denominator * other.denominator
         result_num = mul_numerator / evklid(mul_numerator, mul_denominator)
@@ -34,6 +40,8 @@ class Fraction:
         return Fraction(int(result_num), int(result_denom))
 
     def __truediv__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         div_numerator = self.numerator * other.denominator
         div_denominator = self.denominator * other.numerator
         result_num = div_numerator / evklid(div_numerator, div_denominator)
@@ -41,36 +49,48 @@ class Fraction:
         return Fraction(int(result_num), int(result_denom))
 
     def __lt__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result = self.numerator * (common_denominator / self.denominator) < \
                  other.numerator * (common_denominator / other.denominator)
         return result
 
     def __le__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result = self.numerator * (common_denominator / self.denominator) <= \
                  other.numerator * (common_denominator / other.denominator)
         return result
 
     def __gt__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result = self.numerator * (common_denominator / self.denominator) > \
                  other.numerator * (common_denominator / other.denominator)
         return result
 
     def __ge__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result = self.numerator * (common_denominator / self.denominator) >= \
                  other.numerator * (common_denominator / other.denominator)
         return result
 
     def __eq__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result = self.numerator * (common_denominator / self.denominator) == \
                  other.numerator * (common_denominator / other.denominator)
         return result
 
     def __ne__(self, other):
+        if not isinstance(other, Fraction):
+            raise ValueError("Другий аргумент не є дробом")
         common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
         result = self.numerator * (common_denominator / self.denominator) != \
                  other.numerator * (common_denominator / other.denominator)

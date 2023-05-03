@@ -28,6 +28,17 @@ class Library:
     books: list[books_modul.Book]
     authors: list[authors.Author]
 
+    def new_book(self, name: str, year: int, author: authors.Author):
+        pass
+
+    def group_by_author(self, author: authors.Author):
+        pass
+
+    def group_by_year(self, year: int):
+        pass
+
+
+
 
 # class Book:
 #
