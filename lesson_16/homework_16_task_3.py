@@ -25,24 +25,57 @@
 # get_all_products() - returns information about all available products in the store.
 # get_product_info(product_name) - returns a tuple with product name and amount of items in the store.
 # ```
+from dataclasses import dataclass
 
+@dataclass
 class Product:
-    def __init__(self, type, name, price):
-        self.type = type
-        self.name = name
-        self.price = price
+    type: str
+    name: str
+    price: float
+
+@dataclass
+class ProductInStore:
+    def __init__(self, product: Product, amount = 0):
+        self.product = product
+        self.amount = amount
+        self.pred_price = product.price * 1.3
+        self.discount = 0
 
 class ProductStore:
+
+    def __init__(self):
+        self.products = list()
+        self.income = 0
+
+
     def add(self, product, amount):
-        product.amount = amount
-        product.pred_price = product.price * 1.3
+        if isinstance(product, Product):
+            for item in self.products:
+                if item.product == product:
+                    item.amount = item.amount + amount
+                    break
+            else:
+                self.products.append(ProductInStore(product, amount))
+        else:
+            raise ValueError('Product is not instance of Product class')
 
     def set_discount(self, identifier, percent, identifier_type='name'):
-
-        pass
+        for item in self.products:
+            if (identifier_type == 'name' and item.product.name == identifier) or \
+                   (identifier_type == 'type' and item.product.type == identifier):
+                item.discount = percent
 
     def sell(self, product_name, amount):
-        self.product_name
+        for item in self.products:
+            if item.product.name == product_name:
+                if item.amount < amount:
+                    raise ValueError('There are not so many products in store')
+                else:
+                    item.amount = item.amount - amount
+                    self.income = self.income + amount * (item.pred_price - item.pred_price * item.discount / 100)
+                    break
+        else:
+            raise ValueError('There is not such product in this store')
 
     def get_income(self):
         pass
@@ -54,16 +87,31 @@ class ProductStore:
         pass
 
 
-p = Product('Sport', 'Football T-Shirt', 100)
+p1 = Product('Sport', 'Football T-Shirt', 100)
 p2 = Product('Food', 'Ramen', 1.5)
+p3 = Product('Sport', 'Sneakers', 300)
 
-s = ProductStore()
+s1 = ProductStore()
+s2 = ProductStore()
 
-s.add(p, 10)
-s.add(p2, 300)
-s.add(p, 30)
+s1.add(p1, 10)
+s1.add(p2, 300)
+s1.add(p3, 30)
 
-print(p.amount)
-# s.sell('Ramen', 10)
+s2.add(p1, 50)
+s2.add(p3, 100)
+
+s1.set_discount('Ramen', 20)
+
+for pr in s1.products:
+    print(pr.product.name, pr.amount, pr.discount)
+
+for pr in s2.products:
+    print(pr.product.name, pr.amount, pr.discount)
+
+s1.sell('Ramen', 100)
+
+for pr in s1.products:
+    print(pr.product.name, pr.amount, pr.discount)
 
 # assert s.get_product_info(‘Ramen’) == (‘Ramen’, 290)
