@@ -11,12 +11,11 @@
 import datetime
 
 class CustomException(Exception):
-#    def __init__(self, msg):
-#        try:
-#            return CustomException(msg)
-#        except CustomException:
-#            with open('logs.txt', 'a') as f:
-#                f.write(f'{datetime.now()} - CustomException was raised with message ({msg})')
-    pass
+   def __init__(self, msg):
+       self.msg = msg
+       super().__init__(self.msg)
+       with open('log.txt', 'a') as f:
+           f.write(f'{datetime.datetime.now()} was raised CustomException with message "{self.msg}"\n')
 
-raise CustomException('Some error')
+
+raise CustomException('Some another error')
