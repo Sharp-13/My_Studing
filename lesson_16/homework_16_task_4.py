@@ -8,5 +8,15 @@
 #
 # ```
 
+import datetime
+
 class CustomException(Exception):
-    def __init__(self, msg):
+#    def __init__(self, msg):
+#        try:
+#            return CustomException(msg)
+#        except CustomException:
+#            with open('logs.txt', 'a') as f:
+#                f.write(f'{datetime.now()} - CustomException was raised with message ({msg})')
+    pass
+
+raise CustomException('Some error')

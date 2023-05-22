@@ -78,13 +78,20 @@ class ProductStore:
             raise ValueError('There is not such product in this store')
 
     def get_income(self):
-        pass
+        return self.income
 
     def get_all_products(self):
-        pass
+        all_products = list()
+        for item in self.products:
+            all_products.append(item.product.name)
+        return all_products
 
     def get_product_info(self, product_name):
-        pass
+        for item in self.products:
+            if item.product.name == product_name:
+                return (item.product.name, item.amount)
+        else:
+            raise ValueError(f'There is not product with name {product_name} in this shop')
 
 
 p1 = Product('Sport', 'Football T-Shirt', 100)
@@ -114,4 +121,7 @@ s1.sell('Ramen', 100)
 for pr in s1.products:
     print(pr.product.name, pr.amount, pr.discount)
 
-# assert s.get_product_info(‘Ramen’) == (‘Ramen’, 290)
+print(s1.get_income())
+print(s2.get_all_products())
+
+print(s1.get_product_info('Ramen'))
