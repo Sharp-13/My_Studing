@@ -30,10 +30,4 @@ q.right = TreeNode(2)
 
 ans = Solution()
 print(ans.isSameTree(p, q))
-# def check(p, q):
-#     if p.val != q.val:
-#         return False
-#     else:
-#         left_flag = check(p.left, q.left)
-#         right_flag = check(p.right, q.right)
-#         return left_flag == right_flag
+
