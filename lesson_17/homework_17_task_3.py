@@ -65,20 +65,10 @@ class Fraction:
         return result
 
     def __gt__(self, other):
-        if not isinstance(other, Fraction):
-            raise ValueError("Другий аргумент не є дробом")
-        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
-        result = self.numerator * (common_denominator / self.denominator) > \
-                 other.numerator * (common_denominator / other.denominator)
-        return result
+        return not self<=other
 
     def __ge__(self, other):
-        if not isinstance(other, Fraction):
-            raise ValueError("Другий аргумент не є дробом")
-        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
-        result = self.numerator * (common_denominator / self.denominator) >= \
-                 other.numerator * (common_denominator / other.denominator)
-        return result
+        return not self<other
 
     def __eq__(self, other):
         if not isinstance(other, Fraction):
@@ -89,12 +79,7 @@ class Fraction:
         return result
 
     def __ne__(self, other):
-        if not isinstance(other, Fraction):
-            raise ValueError("Другий аргумент не є дробом")
-        common_denominator = self.denominator * other.denominator / evklid(self.denominator, other.denominator)
-        result = self.numerator * (common_denominator / self.denominator) != \
-                 other.numerator * (common_denominator / other.denominator)
-        return result
+        return not self==other
 
 
 def evklid(a, b):
@@ -114,6 +99,6 @@ if __name__ == "__main__":
     print(x*y)
     print(x/y)
     print(x<y)
-    print(x>y)
-    print(x==y)
+    print(x>=y)
+    print(x!=y)
     assert (x + y) == Fraction(3, 4)

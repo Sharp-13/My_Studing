@@ -67,16 +67,13 @@ class Library:
 
     def new_book(self, name: str, year: int, author: Author):
         self.books.append(Book(name, year, author))
+        author.books.append(name)
         if author not in self.authors:
             self.authors.append(author)
         return Book(name, year, author)
 
     def group_by_author(self, author: Author):
-        authors_books = list()
-        for book in self.books:
-            if book.author == author:
-                authors_books.append(book)
-        return authors_books
+        return author.books
 
     def group_by_year(self, year: int):
         books_by_year = list()
@@ -108,6 +105,7 @@ print(quatrevingt_treize.__str__())
 print(inferno.__repr__())
 print(victor_hugo.__repr__())
 print(dan_brown.__str__())
+print(dumas.__str__())
 print(my_lib.books)
 print(my_lib.authors)
 print(my_hugo_books)
