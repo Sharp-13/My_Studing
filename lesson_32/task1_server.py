@@ -10,18 +10,17 @@ udpsock.bind((host, port))
 while True:
     # Wait for a connection
     print('waiting for a connection')
-    # udpsock.recvfrom(1024)
-    data, client_address = udpsock.recvfrom(1024)
     try:
-        print('connection from', client_address)
-        print('received {!r}'.format(data))
-        if data:
-            print('sending data back to the client')
-            udpsock.sendto(data.upper(), client_address)
-        else:
-            print('no data from', client_address)
-            break
+        while True:
+            data, client_address = udpsock.recvfrom(1024)
+            print('connection from', client_address)
+            print('received {!r}'.format(data))
+            if data:
+                print('sending data back to the client')
+                udpsock.sendto(data.upper(), client_address)
+            else:
+                print('no data from', client_address)
+                break
 
     finally:
-        # Clean up the connection
         udpsock.close()
